@@ -46,7 +46,7 @@ def findElement(browser, name, type):
 
     if ele is None:
         mysms.send_sms("fail", "your mobilephone number")
-        logger.critical("element %s is not found !", name)
+        logger.critical("element %s is not found ! retry times: %d", name, retrynum)
         browser.quit()
 
     return ele
@@ -73,7 +73,7 @@ def findElementAndClick(browser, name, type):
 
     if False == done:
         mysms.send_sms("fail", "your mobilephone number")
-        logger.critical("element %s is not clicked !", name)
+        logger.critical("element %s is not clicked ! retry times: %d", name, retrynum)
         browser.quit()
 
 
@@ -101,7 +101,7 @@ def findElementAndSetContext(browser, name, type, context):
 
     if False == done:
         mysms.send_sms("fail", "your mobilephone number")
-        logger.critical("element %s is not clicked !", name)
+        logger.critical("element %s is not clicked ! retry times: %d", name, retrynum)
         browser.quit()
 
 
@@ -125,6 +125,8 @@ def findElementAndSetContextWhenTextNotNull(browser, name, type, context):
                 ele.clear()
                 ele.send_keys(context)
                 done = True
+            else:
+                time.sleep(1)
 
         except:
             time.sleep(1)
@@ -132,6 +134,6 @@ def findElementAndSetContextWhenTextNotNull(browser, name, type, context):
 
     if False == done:
         mysms.send_sms("fail", "your mobilephone number")
-        logger.critical("element %s is not clicked !", name)
+        logger.critical("element %s is not clicked ! retry times: %d", name, retrynum)
         browser.quit()
 
